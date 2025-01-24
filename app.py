@@ -135,3 +135,22 @@ def process_pdf(file_path):
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
+import sqlite3
+
+def save_conversation(user_message, bot_response):
+    # Connect to SQLite database
+    conn = sqlite3.connect("chatbot.db")
+    cursor = conn.cursor()
+
+    # Insert the conversation
+    cursor.execute("""
+        INSERT INTO conversations (user_message, bot_response)
+        VALUES (?, ?)
+    """, (user_message, bot_response))
+
+    # Commit changes and close connection
+    conn.commit()
+    conn.close()
+
+# Example usage
+save_conversation("Hello!", "Hi there!")
