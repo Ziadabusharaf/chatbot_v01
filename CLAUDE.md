@@ -35,6 +35,6 @@ There is no automated test suite — `test_upload.py` is a standalone script tha
 ## Key caveats and conventions
 
 - The code uses the **legacy OpenAI Python SDK (< 1.0)** interface: `openai.api_key`, `openai.ChatCompletion.create`, and `openai.error.*` exception classes. Installing a modern `openai` (>= 1.0) package will break `app.py` and `test_upload.py` unless the code is migrated. Keep API-call style consistent with whichever SDK version is actually installed.
-- The OpenAI API key is currently **hardcoded in `app.py`** (and stubbed in `test_upload.py`). When touching this code, move it to an environment variable rather than committing any key.
+- The OpenAI API key is read from the **`OPENAI_API_KEY` environment variable** in both `app.py` and `test_upload.py`. Set it before running; never hardcode or commit a key.
 - Uploaded filenames are used as-is when saving to `uploads/` (no sanitization such as `secure_filename`); be aware of this if modifying the upload path handling.
 - `chatbot.db` is committed to the repository, so schema changes via `init_db.py` produce a binary diff.

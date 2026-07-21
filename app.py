@@ -4,8 +4,8 @@ from openpyxl import load_workbook
 from PyPDF2 import PdfReader
 import openai
 
-# Configure OpenAI API Key (replace with your actual key)
-openai.api_key = "***REMOVED***"
+# Configure OpenAI API Key from the environment (set OPENAI_API_KEY before running)
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 app = Flask(__name__)
 

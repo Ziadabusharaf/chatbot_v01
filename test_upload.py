@@ -1,6 +1,8 @@
+import os
+
 import openai
 
-openai.api_key = "your_actual_openai_api_key"
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 try:
     response = openai.ChatCompletion.create(
